@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BODYRAW	utils.h	/^	BODYRAW$/;"	e	enum:POSTMODE
+Get	utils.cpp	/^int Utils::Get(string url,string *response)$/;"	f	class:Utils
+LOG4_DEBUG_CONSOLE	utils.h	28;"	d
+LOG4_DEBUG_FILE	utils.h	25;"	d
+LOG4_ERROR_CONSOLE	utils.h	29;"	d
+LOG4_ERROR_FILE	utils.h	26;"	d
+MemoryStruct	utils.h	/^	MemoryStruct()$/;"	f	struct:MemoryStruct
+MemoryStruct	utils.h	/^struct MemoryStruct$/;"	s
+PARAMS	utils.h	/^	PARAMS,$/;"	e	enum:POSTMODE
+POSTMODE	utils.h	/^enum POSTMODE   \/** Post参数的方式 **\/$/;"	g
+PcAdverInfoLogger	main.cpp	/^Logger PcAdverInfoLogger    = Logger::getInstance("adverInfoLogger");$/;"	v
+Post	utils.cpp	/^int Utils::Post(string url , string argu,string *receive_json,POSTMODE sel) \/\/sel =1,body.raw(json)   else   Params$/;"	f	class:Utils
+Utils	utils.h	/^class Utils$/;"	c
+_UTILS_H_	utils.h	2;"	d
+all_replace	utils.cpp	/^void Utils::all_replace(string& str , const string old_value, const string new_value)$/;"	f	class:Utils
+consoleLogger	main.cpp	/^Logger consoleLogger        = Logger::getInstance("consoleLogger");$/;"	v
+log4cplusInitialize	main.cpp	/^void log4cplusInitialize()$/;"	f
+main	main.cpp	/^int main()$/;"	f
+memory	utils.h	/^	char *memory;$/;"	m	struct:MemoryStruct
+orderRollFileLogger	main.cpp	/^Logger orderRollFileLogger  = Logger::getInstance("tradeRollFileLogger");$/;"	v
+radarInfoLogger	main.cpp	/^Logger radarInfoLogger      = Logger::getInstance("radarInfoLogger");$/;"	v
+rollFileLogger	main.cpp	/^Logger rollFileLogger       = Logger::getInstance("rollFileLogger");$/;"	v
+size	utils.h	/^	size_t size;$/;"	m	struct:MemoryStruct
+voiceRollFileLogger	main.cpp	/^Logger voiceRollFileLogger  = Logger::getInstance("voiceRollFileLogger");$/;"	v
+write_memory_callback	utils.cpp	/^size_t Utils::write_memory_callback(void *ptr, size_t size, size_t nmemb, void *data)$/;"	f	class:Utils
+~MemoryStruct	utils.h	/^	~MemoryStruct()$/;"	f	struct:MemoryStruct

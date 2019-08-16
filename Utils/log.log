@@ -1,0 +1,9 @@
+2019-08-16 17:05:12[main.cpp:31] DEBUG 123123
+2019-08-16 17:07:37[main.cpp:31] DEBUG 123123
+2019-08-16 17:07:37[utils.cpp:15] DEBUG curl init Successfully
+2019-08-16 17:08:22[main.cpp:31] DEBUG 123123
+2019-08-16 17:08:22[utils.cpp:7] DEBUG Get
+2019-08-16 17:08:22[utils.cpp:17] DEBUG curl init Successfully
+2019-08-16 17:09:57[main.cpp:31] DEBUG 123123
+2019-08-16 17:09:57[utils.cpp:7] DEBUG Get
+2019-08-16 17:09:57[utils.cpp:17] DEBUG curl init Successfully
