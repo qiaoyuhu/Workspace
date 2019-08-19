@@ -52,6 +52,7 @@ int main()
 {
 	 log4cplusInitialize();
 	LOG4_DEBUG_CONSOLE("123");
+	LOG4_ERROR_FILE("123");
 }
 
 
