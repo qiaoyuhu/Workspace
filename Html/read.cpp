@@ -30,6 +30,8 @@ int Search(string address)
 	search_value.replace(pos,len,address);
 	search += search_value;
 	out.write(search.c_str(),search.size());
+	in.close();
+	out.close();
 }
 
 int main()

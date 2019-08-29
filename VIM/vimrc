@@ -68,8 +68,18 @@ set showmatch
 set matchtime=5
 " 对应括号高亮的时间（单位是十分之一秒）
 
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'c'
+	exec "!gcc % -o %<"
+	exec "!./%<"
+	elseif &filetype =='cpp'
+	exec "!g++ % -o %<"
+	exec "!./%<"
+	endif
+endfunc
 
-
+map <F5> :call CompileRunGcc()<CR>
 
 
 
@@ -103,12 +113,12 @@ func SetTitle()
 	call append(line(".")+5, "")
 	endif
 	if &filetype == 'cpp'
-	call append(line(".")+6, "#include<iostream>")
+	call append(line(".")+6, "#include <iostream>")
 	call append(line(".")+7, "using namespace std;")
 	call append(line(".")+8, "")
 	endif
 	if &filetype == 'c'
-	call append(line(".")+6, "#include<stdio.h>")
+	call append(line(".")+6, "#include <stdio.h>")
 	call append(line(".")+7, "")
 	endif
 	"	if &filetype == 'java'
@@ -160,14 +170,14 @@ call vundle#end()
 	""不显示隐藏文件
 	let g:NERDTreeHidden=0
 
-	" let mapleader=","
+	 let mapleader=","
 	let g:ycm_server_python_interpreter='/usr/bin/python3'
 	let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 	"nnoremap <leader>jd:YcmCompleter GoToDefinitionElseDeclaration<CR>
 	" 跳到定义或声明  
 	nnoremap jd :YcmCompleter GoToDefinitionElseDeclaration<CR>  
-	"nnoremap <F2> :YcmCompleter GoToDefinitionElseDeclaration<CR>  
+"	nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>  
 	" 强制进行编译  
-	nnoremap <F5> :YcmForceCompileAndDiagnostics<CR> 
+	nnoremap <F6> :YcmForceCompileAndDiagnostics<CR> 
 	"自动补全设置
 	"**********************设置插件****************************
