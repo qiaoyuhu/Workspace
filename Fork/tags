@@ -1,0 +1,12 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+WORD_SIZE	sem_init.cpp	14;"	d	file:
+bin_sem	sem_init.cpp	/^sem_t bin_sem;$/;"	v
+main	Study.cpp	/^int main()$/;"	f
+main	sem_init.cpp	/^int main()$/;"	f
+show	sem_init.cpp	/^void show()$/;"	f
+thread_function	sem_init.cpp	/^void *thread_function(void *arg)$/;"	f

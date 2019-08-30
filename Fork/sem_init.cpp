@@ -17,6 +17,13 @@ using namespace std;
 string work_area ;
 void *thread_function(void *arg);
 sem_t bin_sem;
+/**
+*线程接收到信号，打印work_area。
+*
+*/
+
+
+
 int main()
 {
 	int res;
