@@ -12,22 +12,28 @@ body, html,#container {width: 100%;height: 100%;overflow: hidden;margin:0;font-f
 <div id="container"></div>
 <script type="text/javascript">
 var map = new BMap.Map("container"); 
- // 	var map = new BMap.Map("allmap");    // 创建Map实例
-
-map.centerAndZoom(new BMap.Point(115.866969, 28.749761), 15); 
-var transit = new BMap.TransitRoute(map, { 
-    renderOptions: { 
-        map: map, 
-        autoViewport: false
-        
-    },
-    // 配置跨城公交的换成策略为优先出发早
-    intercityPolicy: BMAP_INTERCITY_POLICY_EARLY_START,
-    // 配置跨城公交的交通方式策略为飞机优先
-    transitTypePolicy: BMAP_TRANSIT_TYPE_POLICY_AIRPLANE
+map.centerAndZoom(new BMap.Point(116.404, 39.915), 12); 
+var transit = new BMap.TransitRoute(); 
+transit.setSearchCompleteCallback(function(results) { 
+    if (transit.getStatus() == BMAP_STATUS_SUCCESS) { 
+        var firstPlan = results.getPlan(0); 
+        // 绘制步行线路 
+        for (var i = 0; i < firstPlan.getNumRoutes(); i++) { 
+            var walk = firstPlan.getRoute(i); 
+            if (walk.getDistance(false) > 0){ 
+                // 步行线路有可能为0 
+                map.addOverlay(new BMap.Polyline(walk.getPoints(), {lineColor: "green"})); 
+            } 
+        } 
+        // 绘制公交线路 
+        for (i = 0; i < firstPlan.getNumLines(); i++) { 
+                var line = firstPlan.getLine(i); 
+                map.addOverlay(new BMap.Polyline(line.getPoints())); 
+        }
+    } 
 });
-var start = new BMap.Point(115.880264,28.727611);
-var end = new BMap.Point(115.866969, 28.749761);
+var start = new BMap.Point(116.310791, 40.003419);
+var end = new BMap.Point(121.490546, 31.233585);
 transit.search(start, end);
 </script>
 </body>

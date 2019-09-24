@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scene name = "wifi">
+<WIFI>
+    <name>ucloud_cssweb</name>
+    <passwd>cssweb123</passwd>
+    <encrypt>WPA</encrypt>
+</WIFI>
+</scene>
