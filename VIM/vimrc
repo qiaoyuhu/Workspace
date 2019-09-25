@@ -156,7 +156,7 @@ call vundle#end()
 	" required 
 
 	" NerdTree才插件的配置信息
-	"将F3设置为开关NERDTree的快捷键
+	"将F2设置为开关NERDTree的快捷键
 	map <F2> :NERDTreeToggle<cr>
 	""修改树的显示图标
 	let g:NERDTreeDirArrowExpandable = '+'
