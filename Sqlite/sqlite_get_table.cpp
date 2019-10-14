@@ -21,6 +21,7 @@ int main()
 	int nrow;
 	int ncolumn;
 	int result;
+	int index ;
 	char *ErrMsg;
 	string sql = "SELECT * FROM COMPANY;";
 	result = sqlite3_open("test.db",&db);
@@ -36,16 +37,19 @@ int main()
 	result = sqlite3_get_table(db,sql.c_str(),&pResult,&nrow,&ncolumn,&ErrMsg);
 	if(result == SQLITE_OK)
 	{
+		index = ncolumn;
+		cout << "nrow : "<<nrow << " ncolumn: "<<ncolumn<<endl;
 		int num = 0;
 		cout << "get_table SUCCESS" <<endl;
 		for(int i=0;i <nrow; i++)
 		{
 			for(int j=0; j<ncolumn; j++)
 			{
-				cout << pResult[num] << "   ";
-				num ++;
+				printf("字段名: %s ?> 字段值:%s\n",pResult[j],pResult[index]);
+				index ++;
 			}
-			cout << "\n"<<endl;
+
+
 		}
 
 	}

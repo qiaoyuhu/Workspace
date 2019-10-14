@@ -1,0 +1,23 @@
+<table class='trans-plan-content'><tr><td>
+<span class='navtrans-bus-icon walk'></span>
+<div class='navtrans-bus-desc'>步行约10米，到达
+	<span class='navtrans-busstation'>绿茵路</span>
+</div>
+</td></tr><tr><td>
+<span class='navtrans-bus-icon bus'></span>
+<div class='navtrans-bus-desc'>乘坐
+	<span class='navtrans-busstation'>轨道交通1号线</span>，经过7站，到达
+	<span class='navtrans-busstation'>八一广场</span>
+</div>
+</td></tr><tr><td>
+<span class='navtrans-bus-icon walk'></span>
+<div class='navtrans-bus-desc'>步行约790米，到达<span class='navtrans-busstation'>八一广场南</span></div>
+</td></tr><tr><td>
+<span class='navtrans-bus-icon bus'></span>
+<div class='navtrans-bus-desc'>乘坐<span class='navtrans-busstation'>22路</span>，经过3站，到达<span class='navtrans-busstation'>火车站</span>
+</div>
+</td></tr><tr><td>
+<span class='navtrans-bus-icon walk'></span>
+<div class='navtrans-bus-desc'>步行约540米，到达<span class='navtrans-busstation'>终点</span></div>
+</td></tr>
+</table>

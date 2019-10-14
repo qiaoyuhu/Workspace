@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-size:14px;}		
+		/** #all-map{width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}*/
+		
+		#all-map{
+			height:100%;
+			width:100%;			
+		}
+
+		#r-result,#r-result table{
+			max-width: 340px; 
+			clear:both;
+			overflow-y:auto; 
+			/*margin-left: 10px;
+			overflow: hidden;*/
+		}
+
+		#r-result{
+			/*position:relative;top: -500px;*/
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			margin: 0px;
+			z-index: 1;
+			max-height: 500px;
+			height:auto; 
+			/**width: auto;*/
+			width: 400px; 
+			/*border: none;*/
+			display:none;
+			} 
+		
+		#routePanel p{float:left;}
+		
+        .BMap_cpyCtrl {
+            display: none;
+        }
+
+        .anchorBL {
+            display: none;
+        }
+
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=NbWORPYbcAyxIw7gh8U1UwSzFenQlTZA"></script>
+	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+	<title>多终点选择的公交换乘查询</title>
+</head>
+<body>	
+	<div id="all-map"> </div>
+	<div id="r-result"></div>
+	
+</body>
+</html>
+<script type="text/javascript">	
+	var map = new BMap.Map("all-map",{ enableMapClick: false });
+   //map.centerAndZoom(new BMap.Point(115.922802,28.683962), 12);
+    map.centerAndZoom("南昌市",12);
+    map.enableScrollWheelZoom();	
+	var top_right_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_RIGHT});
+	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT});
+	map.addControl(top_right_control);
+    map.addControl(top_right_navigation);    
+
+    var sendOnce = false;
+    function sendCoordinateToUi(lng, lat)
+    {
+		QinteractObj.slotRecvBdMapCoordinate(lng, lat);
+	}
+
+	function sendRoutesPlansToUi(mesg)
+	{
+       	QinteractObj.slotRecvRoutesPlansFromJs(mesg);
+	}
+
+
+	function stationName(sStation, eStation)
+	{           
+		sendOnce = true;     
+        $("#r-result").show();
+        map.clearOverlays();
+		transit.search(sStation, eStation);//
+	}
+
+	
+    function TransitRouteSetClear()
+    {	   
+        //$("#r-result").clear();
+        //$('#r-result').hide();
+        //document.getElementById("r-result").style.display="none";
+    }    
+		
+
+    function recvTransitRoutePlanIdFromUi(planInd)
+    {
+		drawRoutesPlans(routeResults, planInd);    	
+    }
+
+
+
+	function drawRoutesPlans(results, planIndex)
+	{		
+		map.clearOverlays();		
+
+		//var marker = new BMap.Marker(new BMap.Point(bike[i][0],bike[i][1]),{icon:myIcon});  
+        // 添加标注
+        //map.addOverlay(marker); 
+
+		var firstPlan = results.getPlan(planIndex);
+		// 绘制步行线路
+		for (var i = 0; i < firstPlan.getNumRoutes(); i++)
+		{
+			var walk = firstPlan.getRoute(i);
+			if (walk.getDistance(false) > 0){
+				// 步行线路有可能为0
+				map.addOverlay(new BMap.Polyline(walk.getPath(), {lineColor: "red"}));
+			}
+		}
+		
+		// 绘制公交线路
+		for (i = 0; i < firstPlan.getNumLines(); i++)
+		{
+			var line = firstPlan.getLine(i);
+			map.addOverlay(new BMap.Polyline(line.getPath(), {lineColor: "red"}));
+		}					
+	}
+
+
+    var transit = new BMap.TransitRoute(map, {
+		renderOptions: {map: map, panel: "r-result"}, 
+		onResultsHtmlSet : function(){$("#r-result").hide()}    
+    });
+
+
+   transit.setMarkersSetCallback(function(results){
+    	  //var str1 = results[0].marker.getLabel().getTitle();
+    	  var str1 = results[0].marker.getTitle();
+  	      var str2 = results[1].marker.getTitle();
+  	      var obj3 = results[1].marker.getPosition();  	      
+  	      var obj4 = results[1].marker.getIcon();
+  	      var obj5 = results[0].marker.getPosition();
+  	      results[0].marker.disableMassClear();
+  	      results[1].marker.disableMassClear();
+  	      //console.log("str1 " + str1 + " str2: " + str2);
+  	      //console.log("1-lng: " + obj3.lng + "lat: " + obj3.lat);
+  	      //console.log("0-lng: " + obj5.lng + "lat: " + obj5.lat);
+  	      //console.log("icon: " + obj4.imageUrl);
+    });
+
+
+    var routeResults;
+    transit.setSearchCompleteCallback(function(results){    
+    	if (transit.getStatus() == BMAP_STATUS_SUCCESS)
+    	{          
+	       // 输出方案信息  
+	        var s = [];            
+	        var ss = []
+	        for (i = 0; i < results.getNumPlans(); i ++)
+	        {            	
+	        	for(j = 0; j < results.getPlan(i).getNumLines(); ++j)
+	        	{
+	        		var line = results.getPlan(i).getLine(j);		
+					//console.log("title: " + line.title);				
+				}
+	            s.push((i + 1) + ". " + results.getPlan(i).getDescription(false));
+	            //s.push(results.getPlan(i).getDescription(true));    
+	            if(sendOnce){	            	            	
+	            	sendRoutesPlansToUi(s[i]);
+	            }	            
+	        }        	        
+			
+			routeResults = results;
+			drawRoutesPlans(routeResults, 0);
+			sendOnce = false;
+    	}
+		TransitRouteSetClear();   
+    });
+
+
+
+
+
+    map.addEventListener("click", function(e){	    
+	    //alert("click" + e.point.lat + "lat: " + e.point.lng);
+	    console.log("lat: " + e.point.lat + "\tlng: " + e.point.lng);
+	    sendCoordinateToUi(e.point.lng, e.point.lat);
+	});
+
+
+	var myGeo = new BMap.Geocoder();      
+	//根据坐标得到地址描述    
+	function getLocationByLngLat(lng, lat){
+		myGeo.getLocation(new BMap.Point(lng, lat), function(result){      
+        if (result){      
+    		alert(result.address);      
+    	}   
+		});	
+	}
+
+	
+	/** 先标记，点击后线路规划 */
+	stationName("雅苑路地铁站","火车站");
+	//getLocationByLngLat(115.927976, 28.668244);
+
+	
+</script>
+
