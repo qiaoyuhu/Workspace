@@ -1,0 +1,5 @@
+edit:sqlite3databases.o
+	g++ sqlite3databases.o -lsqlite3 -o sqlite3databases
+
+sqlite3databases.o:sqlite3databases.cpp
+	g++ -c sqlite3databases.cpp  -std=c++11 
